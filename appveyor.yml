@@ -1,0 +1,49 @@
+version: 1.0.{build}
+install:
+- ps: >-
+    $vsixPath = "$($env:USERPROFILE)\BoostUnitTestAdapter.vsix"
+
+
+    (New-Object Net.WebClient).DownloadFile('https://visualstudiogallery.msdn.microsoft.com/5f4ae1bd-b769-410e-8238-fb30beda987f/file/105652/27/BoostUnitTestAdapter.vsix', $vsixPath)
+
+
+    cd 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\'
+
+
+    .\VSIXInstaller.exe /a $vsixPath
+
+
+    echo $?
+
+
+    echo "INSTALL SCRIPT FINISH"
+
+
+    cd C:\projects\boostunittest2
+before_build:
+- cmd: >-
+    ls
+
+    nuget restore
+build:
+  verbosity: minimal
+after_build:
+- ps: >-
+    $testconsole = "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\"
+
+    $unittestspath = $env:USERPROFILE
+
+
+    ls
+
+
+    cd .\x64\Debug\
+
+
+    ls
+
+
+    cd $testconsole
+
+
+    .\vstest.console.exe /UseVsixExtensions:true /Platform:x64 "C:\projects\boostunittest2\x64\Debug\BoostUnitTest2.exe"
