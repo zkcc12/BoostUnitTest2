@@ -39,7 +39,7 @@ after_build:
     cd $testconsole
 
 
-    .\vstest.console.exe /UseVsixExtensions:true /Platform:x64 "C:\projects\boostunittest2\x64\Debug\BoostUnitTest2.exe".
+    .\vstest.console.exe /UseVsixExtensions:true /Platform:x64 "C:\projects\boostunittest2\x64\Debug\BoostUnitTest2.exe"
 
 after_test:
 - cmd: '- bash <(curl -s https://codecov.io/bash)'
