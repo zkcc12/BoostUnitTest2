@@ -43,4 +43,4 @@ after_build:
 
 after_test:
 - ps: >-
-  curl -s https://codecov.io/bash
+    curl -s https://codecov.io/bash
