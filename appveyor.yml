@@ -40,7 +40,3 @@ after_build:
 
 
     .\vstest.console.exe /UseVsixExtensions:true /Platform:x64 "C:\projects\boostunittest2\x64\Debug\BoostUnitTest2.exe"
-
-after_test:
-- ps: >-
-    curl -s https://codecov.io/bash
