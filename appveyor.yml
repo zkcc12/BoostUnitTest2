@@ -18,7 +18,7 @@ before_build:
     ls
 
     nuget restore
-    choco install codecov
+    - choco install codecov
 
 build:
   verbosity: minimal
