@@ -1,16 +1,9 @@
 version: 1.0.{build}
 install:
-- ps: >-
+- ps: |
     $vsixPath = "$($env:USERPROFILE)\BoostUnitTestAdapter.vsix"
-
-
     (New-Object Net.WebClient).DownloadFile('https://visualstudiogallery.msdn.microsoft.com/5f4ae1bd-b769-410e-8238-fb30beda987f/file/105652/27/BoostUnitTestAdapter.vsix', $vsixPath)
-
-
-    cd 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\'
-
-
-    .\VSIXInstaller.exe /a $vsixPath
+    cmd  /c "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\VSIXInstaller.exe" /q /a $vsixPath
 
 
     echo $?
