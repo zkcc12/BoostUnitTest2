@@ -18,28 +18,20 @@ before_build:
     ls
 
     nuget restore
-    
-- choco install opencover.portable
-- choco install codecov
+    choco install codecov
+
 build:
   verbosity: minimal
+  
 after_build:
 - ps: >-
     $testconsole = "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\"
-
     $unittestspath = $env:USERPROFILE
-
-
     ls
-
-
     cd .\x64\Debug\
-
-
     ls
-
-
     cd $testconsole
-
-
-    .\vstest.console.exe /UseVsixExtensions:true /Platform:x64 "C:\projects\boostunittest2\x64\Debug\BoostUnitTest2.exe"
+    .\vstest.console.exe /UseVsixExtensions:true /Platform:x64 "C:\projects\boostunittest2\x64\Debug\BoostUnitTest2.exe".
+    
+after_test:
+- cmd: '- bash <(curl -s https://codecov.io/bash)'
