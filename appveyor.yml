@@ -1,36 +1,40 @@
 version: 1.0.{build}
+image: Visual Studio 2015
+configuration: Debug
+platform: x64
 install:
-- ps: |
+- ps: >-
     $vsixPath = "$($env:USERPROFILE)\BoostUnitTestAdapter.vsix"
+
+
     (New-Object Net.WebClient).DownloadFile('https://visualstudiogallery.msdn.microsoft.com/5f4ae1bd-b769-410e-8238-fb30beda987f/file/105652/27/BoostUnitTestAdapter.vsix', $vsixPath)
+
+
     cmd  /c "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\VSIXInstaller.exe" /q /a $vsixPath
 
 
     echo $?
+
 
     echo "INSTALL SCRIPT FINISH"
 
 
     cd C:\projects\boostunittest2
 before_build:
-- nuget restore
-- choco install codecov
-- choco install curl
+- cmd: >-
+    nuget restore
 
+    choco install codecov
+
+    choco install curl
 build:
   verbosity: minimal
-
-after_build:
+test_script:
 - ps: >-
     $testconsole = "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\"
 
 
     $unittestspath = $env:USERPROFILE
-
-    ls
-
-
-    cd .\x64\Debug\
 
 
     ls
@@ -39,4 +43,4 @@ after_build:
     cd $testconsole
 
 
-    .\vstest.console.exe /UseVsixExtensions:true /Platform:x64 "C:\projects\boostunittest2\x64\Debug\BoostUnitTest2.exe"
+    .\vstest.console.exe /UseVsixExtensions:true /Platform:x64 /Enablecodecoverage "C:\projects\boostunittest2\x64\Debug\BoostUnitTest2.exe"
