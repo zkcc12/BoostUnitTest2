@@ -3,7 +3,6 @@
 // stdafx.obj will contain the pre-compiled type information
 
 #define BOOST_TEST_MODULE BoostUnitTestSample2
-#define BOOST_TEST_MODULE TestedSystem 
 
 #include "stdafx.h"
 

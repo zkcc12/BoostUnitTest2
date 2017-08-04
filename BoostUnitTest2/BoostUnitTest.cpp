@@ -2,7 +2,6 @@
 #include "stdafx.h"
 #include "myComplex.cpp"
 
-#define BOOST_TEST_MODULE Boost.Test myComplex tests;
 
 myComplex a(3, 5);
 myComplex b(3, 0);
