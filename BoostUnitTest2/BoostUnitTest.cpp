@@ -7,7 +7,7 @@
 myComplex a(3, 5);
 myComplex b(3, 0);
 
-BOOST_AUTO_TEST_CASE( BoostUnitTest )  
+BOOST_AUTO_TEST_CASE( MyComplexBoost )  
 {
     myComplex a(3, 5);
     myComplex b(3, 0);
