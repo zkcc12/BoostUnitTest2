@@ -22,3 +22,4 @@ BOOST_AUTO_TEST_CASE( BoostUnitTestSample2 )
 
       BOOST_CHECK_EQUAL( add( 2,2 ), 4 );       // #7 continues on error
 }
+
