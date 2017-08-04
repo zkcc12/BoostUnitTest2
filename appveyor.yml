@@ -1,23 +1,53 @@
 version: 1.0.{build}
+
 image: Visual Studio 2015
+
 configuration: Debug
+
 platform: x64
+
 environment:
+
   Coverage: C:\Program Files (x86)\Microsoft Visual Studio\2017\TestAgent\Team Tools\Dynamic Code Coverage Tools\
+
 install:
+
 - ps: >-
+
     $vsixPath = "$($env:USERPROFILE)\BoostUnitTestAdapter.vsix"
+
+
+
     (New-Object Net.WebClient).DownloadFile('https://visualstudiogallery.msdn.microsoft.com/5f4ae1bd-b769-410e-8238-fb30beda987f/file/105652/27/BoostUnitTestAdapter.vsix', $vsixPath)
+
+
+
     cmd  /c "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\VSIXInstaller.exe" /q /a $vsixPath
+
+
+
     echo $?
+
+
+
     echo "INSTALL SCRIPT FINISH"
+
+
+
     cd C:\projects\boostunittest2
+
 before_build:
 
 - cmd: >-
+
     nuget restore
+
+
+
     choco install codecov
+
 build:
+
   project: C:\projects\boostunittest2\BoostUnitTest2.sln
 
   verbosity: minimal
@@ -25,17 +55,107 @@ build:
 test_script:
 
 - ps: >-
+
     $testconsole = "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\"
+
+
+
+
+
     $unittestspath = $env:USERPROFILE
+
+
+
+
+
     ls
+
+
+
+
+
     cd $testconsole
+
+
+
+
+
     .\vstest.console.exe /UseVsixExtensions:true /Platform:x64 /Enablecodecoverage "C:\projects\boostunittest2\x64\Debug\BoostUnitTest2.exe"
+
+
+
+
+
     $testReport = get-childitem 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\TestResults\*\*.coverage'
+
+
+
+
+
     echo $testReport.name
+
+
+
+
+
     cd .\TestResults
+
+
+
+
+
     $testFolder = dir -Directory
-    cd $testFolder[1].name
-    cp .\*.coverage .\ConvertedReport.xml
+
+
+
+
+
+    echo "TestFolder is " $testFolder.name
+
+
+
+
+
+    cd $testFolder[0].name
+
+
+
+
+
     ls
+
+
+
+
+
+    echo ------------------------------------- REPORT SHOULD BE DOWN HERE -------------------------------------
+
+
+
+
+
+    cp .\*.coverage .\ConvertedReport.xml
+
+
+
+
+
+    ls
+
+
+
+
+
+    echo ------------------------------------- REPORT SHOULD BE UP HERE -------------------------------------
+
+
+
+
+
     cat .\ConvertedReport.xml
+
+
+
+
+
     codecov -f .\ConvertedReport.xml
