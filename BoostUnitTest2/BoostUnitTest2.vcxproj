@@ -235,6 +235,9 @@
       <UseFullPaths Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</UseFullPaths>
       <UseFullPaths Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</UseFullPaths>
     </ClCompile>
+    <Link>
+      <FullProgramDatabaseFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</FullProgramDatabaseFile>
+    </Link>
   </ItemDefinitionGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
