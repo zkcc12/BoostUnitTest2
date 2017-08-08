@@ -6,18 +6,19 @@ install:
 - ps: >-
 $vsixPath = "$($env:USERPROFILE)\BoostUnitTestAdapter.vsix"
 (New-Object Net.WebClient).DownloadFile('https://visualstudiogallery.msdn.microsoft.com/5f4ae1bd-b769-410e-8238-fb30beda987f/file/105652/27/BoostUnitTestAdapter.vsix', $vsixPath)
-    cmd  /c "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\VSIXInstaller.exe" /q /a $vsixPath
-    echo $?
-    echo "INSTALL SCRIPT FINISH"
-    cd C:\projects\boostunittest2
-    cache: C:\projects\boostunittest2\packages
+cmd  /c "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\VSIXInstaller.exe" /q /a $vsixPath
+echo $?
+echo "INSTALL SCRIPT FINISH"
+cd C:\projects\boostunittest2
+cache: C:\projects\boostunittest2\packages
+
 before_build:
 - cmd: >-
-    nuget restore
-    choco install codecov
+nuget restore
+choco install codecov
 build:
-  project: C:\projects\boostunittest2\BoostUnitTest2.sln
-  verbosity: minimal
+project: C:\projects\boostunittest2\BoostUnitTest2.sln
+verbosity: minimal
 after_build:
 - cmd:
 test_script:
