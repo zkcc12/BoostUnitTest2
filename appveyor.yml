@@ -4,8 +4,8 @@ configuration: Debug
 platform: x64
 install:
 - ps: >-
-    $vsixPath = "$($env:USERPROFILE)\BoostUnitTestAdapter.vsix"
-    (New-Object Net.WebClient).DownloadFile('https://visualstudiogallery.msdn.microsoft.com/5f4ae1bd-b769-410e-8238-fb30beda987f/file/105652/27/BoostUnitTestAdapter.vsix', $vsixPath)
+$vsixPath = "$($env:USERPROFILE)\BoostUnitTestAdapter.vsix"
+(New-Object Net.WebClient).DownloadFile('https://visualstudiogallery.msdn.microsoft.com/5f4ae1bd-b769-410e-8238-fb30beda987f/file/105652/27/BoostUnitTestAdapter.vsix', $vsixPath)
     cmd  /c "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\VSIXInstaller.exe" /q /a $vsixPath
     echo $?
     echo "INSTALL SCRIPT FINISH"
