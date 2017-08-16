@@ -1,5 +1,3 @@
-
-
 version: 1.0.{build}
 
 image: Visual Studio 2015
@@ -7,10 +5,6 @@ image: Visual Studio 2015
 configuration: Debug
 
 platform: x64
-
-environment:
-
-  Coverage: C:\Program Files (x86)\Microsoft Visual Studio\2017\TestAgent\Team Tools\Dynamic Code Coverage Tools\
 
 install:
 
@@ -42,15 +36,7 @@ cache: C:\projects\boostunittest2\packages
 
 before_build:
 
-- cmd: >-
-
-    nuget restore
-
-
-
-
-
-    choco install codecov
+- cmd: nuget restore
 
 build:
 
@@ -58,11 +44,7 @@ build:
 
   verbosity: minimal
 
-after_build:
-
-- cmd: 
-
 test_script:
 
-- ps: "$testconsole = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow\\\"\n\n$VisualCoverage = \"C:\\projects\\boostunittest2\\dep\\VisualCoverage\\\"\n\n$unittestspath = $env:USERPROFILE\n\ncd $testconsole\n\n.\\vstest.console.exe /UseVsixExtensions:true /Platform:x64 /Enablecodecoverage /InIsolation \"C:\\projects\\boostunittest2\\x64\\Debug\\BoostUnitTest2.exe\"\n\n$testReport = get-childitem 'C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow\\TestResults\\*\\*.coverage'\n\necho $testReport.name\n\ncd .\\TestResults\n\n$dir = dir .\\ | ?{$_.PSISContainer} \nforeach ($d in $dir){\n$directoryInfo = Get-ChildItem $d| Measure-Object\nif ($directoryInfo.count -eq 0){\nRemove-Item -Recurse -Force $d\n}\n}\n\n$testFolder = dir -Directory\n\ncd $VisualCoverage \n\n.\\VisualCoverage.exe -i $testReport --clover ConvertedReport.xml\n\ncat \".\\ConvertedReport.xml\"\n\ncodecov -f .\\ConvertedReport.xml"
+- ps: "$testconsole = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow\\\"\n\n$VisualCoverage = \"C:\\projects\\boostunittest2\\dep\\VisualCoverage\\\"\n\n$unittestspath = $env:USERPROFILE\n\ncd $testconsole\n\n.\\vstest.console.exe /UseVsixExtensions:true /Platform:x64 /Enablecodecoverage /InIsolation \"C:\\projects\\boostunittest2\\x64\\Debug\\BoostUnitTest2.exe\"\n\n$testReport = get-childitem 'C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow\\TestResults\\*\\*.coverage'\n\necho $testReport.name\n\ncd .\\TestResults\n\n$dir = dir .\\ | ?{$_.PSISContainer} \nforeach ($d in $dir){\n$directoryInfo = Get-ChildItem $d| Measure-Object\nif ($directoryInfo.count -eq 0){\nRemove-Item -Recurse -Force $d\n}\n}\n\n$testFolder = dir -Directory\n\ncd $VisualCoverage \n\necho $testReport\n\n.\\VisualCoverage.exe -i $testReport --clover ConvertedReport.xml --exclude-namespace boost\n\ncat .\\ConvertedReport.xml\n\n\"SET PATH=C:\\\\Python34;C:\\\\Python34\\\\Scripts;%PATH%\"\npip install codecov\ncodecov -f \"ConvertedReport.xml\" -X gcov"
 
