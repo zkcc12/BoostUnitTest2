@@ -1,0 +1,2 @@
+fixes:
+  - "BoostUnitTest2/TestedSystem/::"        # reduce root e.g., "before/path/" => "path/"
