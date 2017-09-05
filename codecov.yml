@@ -1,2 +1,2 @@
 fixes:
-  - "c:\\projects\boostunittest2\\::"
+  - "c:\\projects\boostunittest2\\.*::"
