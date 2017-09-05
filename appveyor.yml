@@ -37,7 +37,9 @@ test_script:
 
 $testconsole = "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\"
 
-& "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" /UseVsixExtensions:true /Platform:x64 /Enablecodecoverage /InIsolation C:\projects\boostunittest2\x64\Debug\BoostUnitTest2.exe
+$testexe = C:\projects\boostunittest2\x64\Debug\BoostUnitTest2.exe
+
+cmd  /c "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" /UseVsixExtensions:true /Platform:x64 /Enablecodecoverage /InIsolation $testexe
 
 $testReport = get-childitem '.\TestResults\*\*.coverage'
 
