@@ -18,13 +18,19 @@ install:
     echo $?
 
     echo "INSTALL SCRIPT FINISH"
+    
 cache: C:\projects\boostunittest2\packages
 
 before_build:
+
 - cmd: nuget restore
+
 build:
+
   project: C:\projects\boostunittest2\BoostUnitTest2.sln
+  
   verbosity: minimal
+  
 test_script:
 - ps: 
 $testconsole = "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\"
@@ -34,16 +40,23 @@ $testconsole = "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\
 $testReport = get-childitem '.\TestResults\*\*.coverage'
 
 $dir = dir $testReport | ?{$_.PSISContainer} 
+
 foreach ($d in $dir){
+
     $directoryInfo = Get-ChildItem $d| Measure-Object
+    
     if ($directoryInfo.count -eq 0){
+    
         Remove-Item -Recurse -Force $d
+        
     }
 }
 
 
 on_finish:
+
 - ps: >-
+
     C:\projects\boostunittest2\dep\VisualCoverage\VisualCoverage.exe -i $testReport --clover C:\projects\boostunittest2\ConvertedReport.xml --exclude-namespace boost --exclude-file unit_test_main.ipp
 
 
