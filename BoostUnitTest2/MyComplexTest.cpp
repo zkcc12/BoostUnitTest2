@@ -33,3 +33,13 @@ BOOST_AUTO_TEST_CASE(MyComplexValAbsTests)
 
 	BOOST_CHECK(nullVal.abs() == sqrt(0));
 }
+
+BOOST_AUTO_TEST_CASE(MyComplexValOperatorEqualTests) {
+
+	myComplex classictest(2, 2); 
+
+	myComplex classictestCp = classictest;
+
+	BOOST_CHECK(classictest.getReal() == classictestCp.getReal());
+	BOOST_CHECK(classictest.getImag() == classictestCp.getImag());
+}

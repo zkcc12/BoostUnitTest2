@@ -24,6 +24,8 @@ public:
 	~myComplex();
 	// Assigment operator
 	myComplex& operator=(const myComplex& rhs);
+	// NE operator
+
 	// Methods
 	double getReal() const;
 	double getImag() const;

@@ -32,3 +32,4 @@ double myComplex::getImag() const {
 double myComplex::abs() const {
 	return sqrt(this->real * this->real + this->imaginary * this->imaginary);
 }
+
