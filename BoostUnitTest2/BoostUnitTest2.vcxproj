@@ -154,6 +154,10 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MyComplexValAbsTest.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="MyComplexAddTest.cpp">
       <SubType>
       </SubType>
