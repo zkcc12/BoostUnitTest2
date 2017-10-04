@@ -1,8 +1,7 @@
-	  
-#include "stdafx.h"
+
 #include "myComplex.cpp"
 
-BOOST_AUTO_TEST_CASE(MyComplexAddTests)  
+BOOST_AUTO_TEST_CASE(MyComplexAddTests)
 {
 	myComplex a(3, 5);
 	myComplex b(3, 0);
@@ -36,7 +35,7 @@ BOOST_AUTO_TEST_CASE(MyComplexValAbsTests)
 
 BOOST_AUTO_TEST_CASE(MyComplexValOperatorEqualTests) {
 
-	myComplex classictest(2, 2); 
+	myComplex classictest(2, 2);
 
 	myComplex classictestCp = classictest;
 
