@@ -25,7 +25,7 @@ public:
 	// Assigment operator
 	myComplex& operator=(const myComplex& rhs);
 	// plus operator
-	myComplex& operator+(myComplex& rhs, myComplex& rhs2)
+	myComplex& operator+(myComplex& rhs, myComplex& rhs2);
 	
 	// Methods
 	double getReal() const;
