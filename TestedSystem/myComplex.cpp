@@ -21,9 +21,9 @@ myComplex& myComplex::operator=(const myComplex& rhs) {
 	return *this;
 }
 
-myComplex& myComplex::operator+(myComplex& rhs, myComplex& rhs2) {
-	this->real = rhs.real + rhs2.real;
-	this->imaginary = rhs.imaginary + rhs2.imaginary;
+myComplex& myComplex::operator+(myComplex& rhs) {
+	this->real += rhs.real;
+	this->imaginary += rhs.imaginary ;
 
 	return *this;
 }
