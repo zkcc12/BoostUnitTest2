@@ -43,3 +43,27 @@ BOOST_AUTO_TEST_CASE(MyComplexValOperatorEqualTests) {
 	BOOST_CHECK(classictest.getReal() == classictestCp.getReal());
 	BOOST_CHECK(classictest.getImag() == classictestCp.getImag());
 }
+
+BOOST_AUTO_TEST_CASE(MyComplexValOperatorPlusTests1) {
+
+	myComplex op1(5, 8);
+	myComplex op2(2, 2); 
+
+	myComplex plusTest = op1+op2;
+
+	BOOST_CHECK(plusTest.getReal() == 7));
+	BOOST_CHECK(plusTest.getImag() == 10);
+}
+
+
+BOOST_AUTO_TEST_CASE(MyComplexValOperatorPlusTests2) {
+
+	myComplex op1(500,834);
+	myComplex op2(4, 4); 
+
+	myComplex plusTest = op1+op2;
+
+	BOOST_CHECK(plusTest.getReal() == 504));
+	BOOST_CHECK(plusTest.getImag() == 838);
+}
+
